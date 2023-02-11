@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage';
 import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
 import UserInfoPage from './pages/UserInfoPage'
+import FuelQuotePage from './pages/FuelQuotePage'
 import Footer from './components/Footer';
 import styled from 'styled-components';
 
@@ -23,11 +24,11 @@ function App() {
       <Router>
         <NavBoostrap />
         <Routes>
-            <Route path="/" element={<HomePage/>} />
-            <Route path="/userinfo" element={<UserInfoPage/>} />
-            <Route path="/login" element={<LoginPage/>} />
-            <Route path="/register" element={<RegisterPage/>} />
-
+            <Route exact path="/" element={<HomePage/>} />
+            <Route exact path="/userinfo" element={<UserInfoPage/>} />
+            <Route exact path="/login" element={<LoginPage/>} />
+            <Route exact path="/register" element={<RegisterPage/>} />
+            <Route exact path="/fuelQuotePage" element={<FuelQuotePage/>} />
           </Routes>
         <Footer />
       </Router>
