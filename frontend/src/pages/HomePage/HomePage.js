@@ -1,5 +1,5 @@
 import { React, useContext, useEffect } from 'react';
-import banner from '../../iamge/banner.avif';
+import banner from '../../image/banner.avif';
 import { Link } from 'react-router-dom';
 import styled, { css,keyframes } from 'styled-components';
 import Popup from 'reactjs-popup'
