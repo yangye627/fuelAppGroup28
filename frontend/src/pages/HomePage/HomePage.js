@@ -2,7 +2,6 @@ import { React, useContext, useEffect } from 'react';
 import banner from '../../image/banner.avif';
 import { Link } from 'react-router-dom';
 import styled, { css,keyframes } from 'styled-components';
-import Popup from 'reactjs-popup'
 import { device } from '../../const/devices';
 
 const Root = styled.div`
@@ -22,7 +21,7 @@ const SlideUp = keyframes`
     }
 `;
 
-const Action = styled.button`
+const Action = styled(Link)`
     @media ${device.mobileXS} {
         width: 80%;
         height: 100px;
@@ -114,88 +113,13 @@ const Banner = styled.section`
     };
 `;
 
-const Content = styled.div`
-    width: 100%;
-    font-size: 50px;
-    font-family: 'Permanent Marker', cursive;
-    padding: 80px 20px;
-    background: rgb(254, 255, 248);
-`;
-
-const Actions = styled.div`
-    width: 100%;
-    padding: 10px 5px;
-    margin: auto;
-    text-align: center;
-    background: rgb(254, 255, 248);
-`;
-
-const reuseButton = css`
-    margin: 10px 10px;
-    border-radius: 8px;
-    padding: 20px 20px;
-    text-align: center;
-    color: black;
-`;
-
-const reuseHover = css`
-    font-weight: bold;
-    color: #fefff8;
-`;
-
-const PopupButton = styled.button`
-    background: #fece35;
-    border: none;
-    ${reuseButton};
-    width: 400px;
-
-    &:hover {
-        ${reuseHover}
-    }
-`;
-
 export default function HomePage() {
 
     return (
         <Root>
             <Banner>
                 <h1>When neighbors quarrel, lookers-on are more apt to add fuel than water. :)</h1>
-                <Popup
-                    trigger={<Action className='button'>Get Fuel Quote</Action>}
-                    position='top center'
-                    on = {'hover'}
-                    reserve
-                    nested
-                >
-                    {close => (
-                        <div className='reserve'>
-                            <PopupButton className='close' onClick={close}>
-                                X
-                            </PopupButton>
-                            <Content className='content'>
-                                {' '}
-                                Do you want to continue reserve your table as guest?
-                            </Content>
-                            <Actions className='actions'>
-                                <Link to="/register">
-                                    <PopupButton className='botton' data-inline='true'>
-                                        Register
-                                    </PopupButton>
-                                </Link>
-                                <Link to="/login">
-                                    <PopupButton className='botton' data-inline='true'>
-                                        Login
-                                    </PopupButton>
-                                </Link>
-                                <Link to="/reserve">
-                                    <PopupButton className='botton' data-inline='true'>
-                                        Continue as guest
-                                    </PopupButton>
-                                </Link>
-                            </Actions>
-                        </div>
-                    )}
-                </Popup>
+                <Action className='button' Link to={"/login"}>Get Fuel Quote</Action>
             </Banner>
         </Root>
     )
