@@ -1,19 +1,38 @@
-import react, { useState } from 'react';
-function app(){
- const [username, setUsername] = useState('');
- const  [password, setPassword] = useState('');
-return(
-  <div className='App'>
-    <div className='login'>
-      <h1>Login</h1>
-      <label>Username</label>
-      <input type='text' value={username} onChange={(e) => setUsername(e.target.value)} />
-      <label>Password</label>
-      <input type='password' value={password} onChange={(e) => setPassword(e.target.value)} />
-      <button>Login</button>
-    </div>
-  </div>
-  
-)
-};
-  
+import React, { useState } from 'react';
+
+function LoginPage() {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    console.log('Username:', username);
+    console.log('Password:', password);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="username">Username:</label>
+        <input
+          type="text"
+          id="username"
+          value={username}
+          onChange={event => setUsername(event.target.value)}
+        />
+      </div>
+      <div>
+        <label htmlFor="password">Password:</label>
+        <input
+          type="password"
+          id="password"
+          value={password}
+          onChange={event => setPassword(event.target.value)}
+        />
+      </div>
+      <button type="submit">Login</button>
+    </form>
+  );
+}
+
+export default LoginPage;
