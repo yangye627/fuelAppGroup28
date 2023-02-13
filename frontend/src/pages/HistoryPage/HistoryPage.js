@@ -2,141 +2,92 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled, {css} from 'styled-components';
-
+import { Form, Row, Col, Container, Alert, Table } from 'react-bootstrap';
 
 const Root = styled.div`
     width: 100%;
+    min-height: 100vh;
     background: #fefff8;
-`;
-
-const SlideUp = keyframes`
-    0% {
-        opacity: 0;
-        transform: translateY(250px);
-    }
-
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-`;
-
-const Action = styled(Link)`
-    @media ${device.mobileXS} {
-        width: 80%;
-        height: 100px;
-        padding: 26px;
-        margin-top: 400px;
-        background: #87D8C3;
-        border-radius: 10px;
-        text-align: center;
-        font-size: 24px;
-        font-weight: bold;
-        color: #ffffff;
-        line-height: 1;
-        transition: transform 0.5s;
-        z-index: 1;
-        border: none;
-        animation: ${SlideUp} 2.5s ease;
-    };
-
-    @media ${device.mobileS} {
-        padding: 26px;
-    };
-
-    @media ${device.mobileM} {
-        line-height: 1.5;
-    };
-
-    @media ${device.tablet} {
-        width: 60%;
-        line-height: 2;
-    };
-    @media ${device.laptopL} {
-        width: 30%;
-        margin-top: 400px;
-    };
-
-    &:hover {
-        color: #fefff8;
-        text-decoration: none;
-        transform: scale(1.1);
-    };
-`;
-
-const Banner = styled.section`
-    width: 100%;
-    height: 1000px;
-    background: url(${banner}) no-repeat center/cover;
+    padding: 50px 0px;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    position: relative;
-
-    h1 {
-        position: absolute;
-        z-index: 1;
-        margin-bottom: 400px;
-        font-size: 80px;
-        color: white;
-        margin-left: 16px;
-        font-family: 'Permanent Marker', cursive;
-        animation: ${SlideUp} 2.1s ease;
-    };
-
-    &::after {
-        content: '';
-        background: rgba(0, 0, 0, 0.4);
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-    };
-
-    @media ${device.mobileXS} {
-        h1 {
-            font-size: 80px;
-        }
-    };
-
-    @media ${device.mobileL} {
-        h1 {
-            font-size: 90px;
-        }
-    };
-    @media ${device.tablet} {
-        h1 {
-            font-size: 100px;
-            text-align: center;
-        }
-    };
 `;
 
-const FuelHistory = () => {
-  const [fuelHistory, setFuelHistory] = useState([]);
+const Title = styled.h2`
+    text-align: center;
+    border-left: 12px solid #a3dea2;
+    border-radius: 8px;
+    padding-left: 16px;
+    padding-right: 16px;
+    border-right: 12px solid #a3dea2;
+    font-family: 'Permanent Marker', cursive;
+`;
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await axios.get('http://localhost:3000');
-      setFuelHistory(result.data);
-    };
-    fetchData();
-  }, []);
+const UserInfoForm = styled.form`
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
+
+const InputContainer = styled.section`
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+`;
+
+const InputLabel = styled.label`
+    width: 80px;
+    margin: 20px 20px;
+`;
+
+const Input = styled.input`
+    height: 38px;
+    margin: 10px 10px;
+    border-radius: 5px;
+`;
+
+const RegisterButton = styled.button`
+    background: #a3dea2;
+    border: none;
+    margin: 10px 10px;
+    border-radius: 8px;
+    padding: 10px 10px;
+    text-align: center;
+    color: black;
+    width: 180px;
+`;
+
+
+const HistoryPage = () => {
+  // const [fuelHistory, setFuelHistory] = useState([]);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const result = await axios.get('http://localhost:3000');
+  //     setFuelHistory(result.data);
+  //   };
+  //   fetchData();
+  // }, []);
  
   return (
-    <div>
-      <h2>Fuel History</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Fuel Type</th>
-            <th>Amount</th>
-            <th>Price</th>
-          </tr>
-        </thead>
+    <Root>
+      <Title>Fuel History</Title>
+      <Table>
+        <Col md={80}>
+          
+          <Row>Date</Row>
+          <Row>Fuel Type</Row>
+          <Row>Amount</Row>
+          <Row>Price</Row>
+        </Col>
         <tbody>
+          <td>1</td>
+        </tbody>
+        {/* <tbody>
           {fuelHistory.map(entry => (
             <tr key={entry.id}>
               <td>{entry.date}</td>
@@ -145,10 +96,10 @@ const FuelHistory = () => {
               <td>{entry.price}</td>
             </tr>
           ))}
-        </tbody>
-      </table>
-    </div>
+        </tbody> */}
+      </Table>
+    </Root>
   );
 };
 
-export default FuelHistory;
+export default HistoryPage;
