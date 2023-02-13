@@ -118,7 +118,7 @@ const FuelHistory = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get('<API URL HERE>');
+      const result = await axios.get('http://localhost:3000');
       setFuelHistory(result.data);
     };
     fetchData();
