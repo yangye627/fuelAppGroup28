@@ -25,7 +25,7 @@ const Title = styled.h2`
     font-family: 'Permanent Marker', cursive;
 `;
 
-const UpdateProfile = styled.button`
+const QuoteFuel = styled.button`
     background: #a3dea2;
     border: none;
     margin: 10px 10px;
@@ -94,13 +94,15 @@ export const Register = () => {
                     onChange={(f) => setPrice(f.currentTarget.value)}
                     /><br />888need user info from db <br /><br />
             </Form.Group>
+            <QuoteFuel >
+                Get the total amount
+            </QuoteFuel>
             <br /><br />
             <Form.Group>
                 <Form.Label>Total Amount Due:</Form.Label>
                 <Form.Text 
                     type="float"
                     value={amount || ""}
-                    onChange={(f) => setAmount(f.currentTarget.value)}
                     /><br />888need user info from db <br /><br />
             </Form.Group>
         </Form>

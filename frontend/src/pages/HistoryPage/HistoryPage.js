@@ -50,7 +50,7 @@ const Input = styled.input`
     border-radius: 5px;
 `;
 
-const RegisterButton = styled.button`
+const BackButton = styled.button`
     background: #a3dea2;
     border: none;
     margin: 10px 10px;
@@ -76,17 +76,27 @@ const HistoryPage = () => {
   return (
     <Root>
       <Title>Fuel History</Title>
-      <Table>
-        <Col md={80}>
-          
-          <Row>Date</Row>
-          <Row>Fuel Type</Row>
-          <Row>Amount</Row>
-          <Row>Price</Row>
-        </Col>
-        <tbody>
-          <td>1</td>
-        </tbody>
+      <Container>
+        <Row>
+          <Col>Delivery Date</Col>
+          <Col>08/21/2023(hardcode for now need to get info from db once db is completed)</Col>
+        </Row>
+        <Row>
+          <Col>Delivery Address</Col>
+          <Col>110 BeerXGnarDogs St, Houston, TX, 77036</Col>
+        </Row>
+        <Row>
+          <Col>Gallons Requested</Col>
+          <Col>100</Col>
+        </Row>
+        <Row>
+          <Col>Suggested Price</Col>
+          <Col>2.58</Col>
+        </Row>
+        <Row>
+          <Col>Total Amount</Col>
+          <Col>100</Col>
+        </Row>
         {/* <tbody>
           {fuelHistory.map(entry => (
             <tr key={entry.id}>
@@ -97,7 +107,10 @@ const HistoryPage = () => {
             </tr>
           ))}
         </tbody> */}
-      </Table>
+      </Container>
+      <BackButton>
+        Back to Profile
+      </BackButton>
     </Root>
   );
 };

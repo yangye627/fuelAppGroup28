@@ -70,7 +70,7 @@ function LoginPage() {
 
   return (
     <Root onSubmit={handleSubmit}>
-        <Title>Regist</Title>
+        <Title>Register</Title>
         <InputContainer>
             <InputLabel htmlFor="username">Username:</InputLabel>
             <Input
