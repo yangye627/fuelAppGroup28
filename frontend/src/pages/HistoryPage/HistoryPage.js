@@ -45,20 +45,20 @@ const InputLabel = styled.label`
 `;
 
 const Input = styled.input`
-    height: 38px;
-    margin: 10px 10px;
-    border-radius: 5px;
+  height: 38px;
+  margin: 10px 10px;
+  border-radius: 5px;
 `;
 
 const BackButton = styled.button`
-    background: #a3dea2;
-    border: none;
-    margin: 10px 10px;
-    border-radius: 8px;
-    padding: 10px 10px;
-    text-align: center;
-    color: black;
-    width: 180px;
+  background: #a3dea2;
+  border: none;
+  margin: 10px 10px;
+  border-radius: 8px;
+  padding: 10px 10px;
+  text-align: center;
+  color: black;
+  width: 180px;
 `;
 
 
