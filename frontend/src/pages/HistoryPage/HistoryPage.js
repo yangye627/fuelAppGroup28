@@ -91,6 +91,13 @@ const HistoryPage = () => {
           <Col>2.58</Col>
           <Col>100</Col>
         </Row>
+        <Row>
+          <Col>09/30/2023</Col>
+          <Col>2201 Doubecats St, Houston, TX, 77024</Col>
+          <Col>150</Col>
+          <Col>2.67</Col>
+          <Col>150</Col>
+        </Row>
         {/* <tbody>
           {fuelHistory.map(entry => (
             <tr key={entry.id}>
