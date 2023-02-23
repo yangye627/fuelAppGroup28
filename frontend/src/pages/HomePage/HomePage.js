@@ -23,21 +23,21 @@ const SlideUp = keyframes`
 
 const Action = styled(Link)`
     @media ${device.mobileXS} {
-        width: 80%;
-        height: 100px;
-        padding: 26px;
-        margin-top: 400px;
-        background: #87D8C3;
-        border-radius: 10px;
-        text-align: center;
-        font-size: 24px;
-        font-weight: bold;
-        color: #ffffff;
-        line-height: 1;
-        transition: transform 0.5s;
-        z-index: 1;
-        border: none;
-        animation: ${SlideUp} 2.5s ease;
+    width: 80%;
+    height: 100px;
+    padding: 26px;
+    margin-top: 400px;
+    background: #87D8C3;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff;
+    line-height: 1;
+    transition: transform 0.5s;
+    z-index: 1;
+    border: none;
+    animation: ${SlideUp} 2.5s ease;
     };
 
     @media ${device.mobileS} {
