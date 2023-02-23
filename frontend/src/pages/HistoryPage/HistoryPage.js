@@ -79,22 +79,16 @@ const HistoryPage = () => {
       <Container>
         <Row>
           <Col>Delivery Date</Col>
-          <Col>08/21/2023(hardcode for now need to get info from db once db is completed)</Col>
-        </Row>
-        <Row>
           <Col>Delivery Address</Col>
-          <Col>110 BeerXGnarDogs St, Houston, TX, 77036</Col>
-        </Row>
-        <Row>
           <Col>Gallons Requested</Col>
-          <Col>100</Col>
-        </Row>
-        <Row>
           <Col>Suggested Price</Col>
-          <Col>2.58</Col>
+          <Col>Total Amount</Col>
         </Row>
         <Row>
-          <Col>Total Amount</Col>
+          <Col>08/21/2023(hardcode for now need to get info from db once db is completed)</Col>
+          <Col>110 BeerXGnarDogs St, Houston, TX, 77036</Col>
+          <Col>100</Col>
+          <Col>2.58</Col>
           <Col>100</Col>
         </Row>
         {/* <tbody>
