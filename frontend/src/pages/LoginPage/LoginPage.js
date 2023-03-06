@@ -77,8 +77,10 @@ function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = event => {
-    event.preventDefault();
+  const handleSubmit = async (e) => {
+    console.log("6666666Username:");
+
+    e.preventDefault();
     console.log('Username:', username);
     console.log('Password:', password);
   };
@@ -104,8 +106,8 @@ function LoginPage() {
             onChange={event => setPassword(event.target.value)}
             />
         </InputContainer>
-            <LoginButton type="submit">Login</LoginButton>
-            <Linkq className='button' Link to={"/register"}>Register</Linkq>
+            <LoginButton variant="primary" type="submit">Login</LoginButton>
+            <Linkq to={"/register"} className='button'>Register</Linkq>
     </Root>
   );
 }

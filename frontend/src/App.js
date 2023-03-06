@@ -24,14 +24,13 @@ function App() {
     <Root>
       <Router>
         <NavBoostrap />
-        <FuelHistory/>
-        {/* <Routes>
-            <Route exact path="/" element={<HomePage/>} />
+        <Routes>
+            <Route exact path="/" element={<UserInfoPage/>} />
             <Route exact path="/userinfo" element={<UserInfoPage/>} />
             <Route exact path="/login" element={<LoginPage/>} />
             <Route exact path="/register" element={<RegisterPage/>} />
             <Route exact path="/fuelQuotePage" element={<FuelQuotePage/>} />
-          </Routes> */}
+          </Routes>
         <Footer />
       </Router>
     </Root>
