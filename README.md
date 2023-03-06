@@ -1,13 +1,23 @@
-pip install -r requirements.txt
+Frontend:
 
-using proper virtual environment, s.t. virtualenv
-    - create virtual env
-        virtualenv venv
+*change directory to frontend directory
+
+    npm start
+
+Backend: 
+
+*change directory to backend directory
+
+1. pip install -r requirements.txt
+
+2. using proper virtual environment, s.t. virtualenv
+    - create virtual env (may not needed)
+                `virtualenv venv`
     - call the virtual env 
-        Set-ExecutionPolicy Unrestricted -Scope Process
+                `Set-ExecutionPolicy Unrestricted -Scope Process`
     - active virtual env
-        venv\Scripts\activate
+                `venv\Scripts\activate`
 
-uvicorn main:app --reload
+3.      uvicorn main:app --reload
 
-after backend starts running, using http://127.0.0.1:8000/docs to get backend UI
+4. after backend starts running, using http://127.0.0.1:8000/docs to get backend UI
