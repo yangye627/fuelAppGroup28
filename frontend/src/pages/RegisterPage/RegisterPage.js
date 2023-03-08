@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled, { css,keyframes } from 'styled-components';
-
+import { Navigate } from 'react-router-dom';
 const Root = styled.div`
     width: 100%;
     min-height: 100vh;
@@ -58,18 +58,13 @@ const RegisterButton = styled.button`
     width: 180px;
 `;
 
-function LoginPage() {
+function RegisterPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = event => {
-    event.preventDefault();
-    console.log('Username:', username);
-    console.log('Password:', password);
-  };
 
   return (
-    <Root onSubmit={handleSubmit}>
+    <Root>
         <Title>Register</Title>
         <InputContainer>
             <InputLabel htmlFor="username">Username:</InputLabel>
@@ -89,9 +84,32 @@ function LoginPage() {
             onChange={event => setPassword(event.target.value)}
             />
         </InputContainer>
-        <RegisterButton type="submit">Regist</RegisterButton>
+        <RegisterButton 
+            onClick={async () => {
+                console.log('Username:', username);
+                console.log('Password:', password);
+                const userAuth = { username, password };
+                const response = await fetch("/register", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json"
+                  },
+                  body: JSON.stringify(userAuth)
+                });
+            
+                if (response.ok) {
+                  setUsername("");
+                  setPassword("");
+                  window.location.href = '/#/login';
+                }
+                else {
+                    console.log("666");
+                }
+              }
+            }
+        >Regist</RegisterButton>
     </Root>
   );
 }
 
-export default LoginPage;
+export default RegisterPage;

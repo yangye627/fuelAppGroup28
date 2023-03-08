@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled, { css,keyframes } from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';  
@@ -77,22 +77,32 @@ function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = async (e) => {
-    console.log("6666666Username:");
+  let u = ""
+  let p = ""
+    // useEffect(()=>{
+    //     fetch("/user").then(
+    //         res => res.json()
+    //     ).then(
+    //         data => {
+    //             setData(data)
+    //         }
+    //     )
+    // },[])
 
-    e.preventDefault();
-    console.log('Username:', username);
-    console.log('Password:', password);
-  };
+    // if (typeof data.user !== "undefined"){
+    //     u = (data.user.at([0]))
+    //     p = (data.user.at([1]))
+    // }
 
   return (
-    <Root onSubmit={handleSubmit}>
+    <Root>
         <Title>Login</Title>
         <InputContainer>
             <InputLabel htmlFor="username">Username:</InputLabel>
             <Input
             type="text"
             id="username"
+            placeholder={u}
             value={username}
             onChange={event => setUsername(event.target.value)}
             />
@@ -102,11 +112,41 @@ function LoginPage() {
             <Input
             type="password"
             id="password"
+            placeholder={p}
             value={password}
             onChange={event => setPassword(event.target.value)}
             />
         </InputContainer>
-            <LoginButton variant="primary" type="submit">Login</LoginButton>
+            <LoginButton 
+                onClick={async () => {
+                    if (username === '' || password === '')
+                    {
+                        alert("username and password must be filled");
+                    }
+                    else{
+                        const userAuth = { username, password };
+                        const response = await fetch("/login", {
+                            method: "POST",
+                            headers: {
+                            "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify(userAuth)
+                        });
+                        console.log(response);
+                        if (response.ok) {
+                            console.log("works!!!!!!!!!!!!!!!!!");
+                            setUsername("");
+                            setPassword("");
+                            window.location.href = '/#/profile';
+                        }
+                        else {
+                            alert("incorrct username or password");
+                        }
+                    }
+                  }
+                }
+            
+            >Login</LoginButton>
             <Linkq to={"/register"} className='button'>Register</Linkq>
     </Root>
   );
