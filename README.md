@@ -1,20 +1,13 @@
-Frontend:
+pip install -r requirements.txt
 
-*change directory to frontend directory
-    npm start
-
-Backend: 
-
-*change directory to backend directory
-
-1. pip install -r requirements.txt || pip install flask
-
-2. using proper virtual environment, s.t. virtualenv
-    - create virtual env (may not needed)
-                `virtualenv venv`
+using proper virtual environment, s.t. virtualenv
+    - create virtual env
+        virtualenv venv
     - call the virtual env 
-                `Set-ExecutionPolicy Unrestricted -Scope Process`
+        Set-ExecutionPolicy Unrestricted -Scope Process
     - active virtual env
-                `venv\Scripts\activate`
+        venv\Scripts\activate
 
-3.      python .\main.py
+uvicorn main:app --reload
+
+after backend starts running, using http://127.0.0.1:8000/docs to get backend UI
