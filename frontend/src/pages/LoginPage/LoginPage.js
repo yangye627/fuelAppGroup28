@@ -77,23 +77,6 @@ function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  let u = ""
-  let p = ""
-    // useEffect(()=>{
-    //     fetch("/user").then(
-    //         res => res.json()
-    //     ).then(
-    //         data => {
-    //             setData(data)
-    //         }
-    //     )
-    // },[])
-
-    // if (typeof data.user !== "undefined"){
-    //     u = (data.user.at([0]))
-    //     p = (data.user.at([1]))
-    // }
-
   return (
     <Root>
         <Title>Login</Title>
@@ -102,7 +85,6 @@ function LoginPage() {
             <Input
             type="text"
             id="username"
-            placeholder={u}
             value={username}
             onChange={event => setUsername(event.target.value)}
             />
@@ -112,7 +94,6 @@ function LoginPage() {
             <Input
             type="password"
             id="password"
-            placeholder={p}
             value={password}
             onChange={event => setPassword(event.target.value)}
             />
@@ -137,7 +118,7 @@ function LoginPage() {
                             console.log("works!!!!!!!!!!!!!!!!!");
                             setUsername("");
                             setPassword("");
-                            window.location.href = '/#/profile';
+                            window.location.href = '/#/userinfo';
                         }
                         else {
                             alert("incorrct username or password");

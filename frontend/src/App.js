@@ -25,7 +25,7 @@ function App() {
       <Router>
         <NavBoostrap />
         <Routes>
-            <Route exact path="/" element={<UserInfoPage/>} />
+            <Route exact path="/" element={<HomePage/>} />
             <Route exact path="/userinfo" element={<UserInfoPage/>} />
             <Route exact path="/login" element={<LoginPage/>} />
             <Route exact path="/register" element={<RegisterPage/>} />
@@ -38,18 +38,3 @@ function App() {
 }
 
 export default App;
-
-
-{/* <Route path="/userinfo">
-<UserInfoPage />
-</Route>
-<Route path="/register">
-{user ? <HomePage /> : <RegisterPage />}
-<RegisterPage />
-</Route>
-<Route path='/Login'>
-<LoginPage />
-<div className="App">
-<ProtectedRoute path='/Login' exact strict component = {Home}/>
-</div>
-</Route> */}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // import { useHistory } from 'react-router';
 import { Form, Row, Col, Container, Alert, Table } from 'react-bootstrap';
 // import auth from '../../auth/auth';
@@ -42,20 +42,31 @@ export const Register = () => {
   const [fullName, setFullName] = useState('');
   const [address1, setAddress1] = useState('');
   const [address2, setAddress2] = useState('');
-  const [city, setCity] = useState('');
-  const [state, setState] = useState('');
-  const [zipcode, setZipcode] = useState('');
-  const [error, setError] = useState('');
+  const [city, setCity]         = useState('');
+  const [state, setState]       = useState('');
+  const [zipcode, setZipcode]   = useState('');
 
-// if we get our database, those placehold should be the value from db
-// const [user, setUser] = useState([{}])
-//     useEffect(() => {
-//         axios.get('http://localhost:8000/auth/users/me') // update api 
-//             .then(res => {
-//                 setUser(res.data)
-//             })
-//     });
-//     console.log(u<option>)
+    useEffect(() => {
+        const fetchUserInfo = async () => {
+            const response = await fetch("/userInfo")
+            const fetchedUser = await response.json()
+            if (typeof fetchedUser.user.fullName !== "undefined"){
+                setFullName(fetchedUser.user.fullName);
+                setAddress1(fetchedUser.user.address1);
+                setAddress2(fetchedUser.user.address2);
+                setCity    (fetchedUser.user.city);
+                setState   (fetchedUser.user.state);
+                setZipcode (fetchedUser.user.zipcode);
+                return;
+            }
+        }
+
+        const interval = setInterval(function(){
+            fetchUserInfo();
+            clearInterval(interval);
+            return
+        }, 2000)
+    }, [])
 
   return (
     <Root>
@@ -66,6 +77,7 @@ export const Register = () => {
                 <Form.Control 
                     required pattern="[A-Za-z]+"
                     type="text"
+                    placeholder={fullName}
                     value={fullName || ""}
                     onChange={(f) => setFullName(f.currentTarget.value)}
                     />
@@ -75,6 +87,7 @@ export const Register = () => {
                 <Form.Control 
                     required pattern="[A-Za-z0-9]+"
                     type="text"
+                    placeholder={address1}
                     value={address1 || ""}
                     onChange={(f) => setAddress1(f.currentTarget.value)}
                     />
@@ -84,6 +97,7 @@ export const Register = () => {
                 <Form.Control 
                     required pattern="[A-Za-z0-9]+"
                     type="text"
+                    placeholder={address2}
                     value={address2 || ""}
                     onChange={(f) => setAddress2(f.currentTarget.value)}
                     />
@@ -93,13 +107,14 @@ export const Register = () => {
                 <Form.Control 
                     required pattern="[A-Za-z]+"
                     type="text"
+                    placeholder={city}
                     value={city || ""}
                     onChange={(f) => setCity(f.currentTarget.value)}
                     />
             </Form.Group>
             <Form.Group>
                 <Form.Label>State</Form.Label>
-                    <select id="inputState" className="form-control" value={state || ""} onChange={(f) => setState(f.currentTarget.value)}>
+                    <select id="inputState" className="form-control" placeholder={state} value={state || ""} onChange={(f) => setState(f.currentTarget.value)}>
                         <option selected>Choose...</option>
                         <option>AL</option>
                         <option>AK</option>
@@ -162,16 +177,38 @@ export const Register = () => {
                 <Form.Control 
                     required pattern="[A-Za-z0-9]+"
                     type="text"
+                    placeholder={zipcode}
                     value={zipcode || ""}
                     onChange={(f) => setZipcode(f.currentTarget.value)}
                     />
             </Form.Group>
         </Form>
         <UpdateProfile
-            className="reserveSubmit"
-            type = "submit"
-            variant = "primary"
-            size = "lg"
+            onClick={async () => {
+                const userinfo = { fullName, address1, address2, city, state, zipcode };
+                const response = await fetch("/profile", {
+                    method: "POST",
+                    headers: {
+                    "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(userinfo)
+                });
+                console.log(response);
+                if (response.ok) {
+                    console.log("profile works!!!!!!!!!!!!!!!!!");
+                    // setFullName("");
+                    // setAddress1("");
+                    // setAddress2("");
+                    // setCity("");
+                    // setState("");
+                    // setZipcode("");
+                    // window.location.href = '/#/profile';
+                }
+                else {
+                    alert("incorrct profile return");
+                }
+            }
+        }
         >
             Update My Profile
         </UpdateProfile>
