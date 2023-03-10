@@ -106,6 +106,14 @@ export const Register = () => {
                     /><br />888need user info from db <br /><br />
             </Form.Group>
         </Form>
+        <QuoteFuel
+            onClick={async () => {
+                window.location.href = '/#/userinfo';
+            }
+        }
+        >
+            Back to Profile
+        </QuoteFuel>
     </Root>
   );
 };

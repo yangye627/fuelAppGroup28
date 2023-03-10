@@ -29,7 +29,8 @@ function App() {
             <Route exact path="/userinfo" element={<UserInfoPage/>} />
             <Route exact path="/login" element={<LoginPage/>} />
             <Route exact path="/register" element={<RegisterPage/>} />
-            <Route exact path="/fuelQuotePage" element={<FuelQuotePage/>} />
+            <Route exact path="/fuelQuote" element={<FuelQuotePage/>} />
+            <Route exact path="/history" element={<FuelHistory/>} />
           </Routes>
         <Footer />
       </Router>

@@ -109,9 +109,14 @@ const HistoryPage = () => {
           ))}
         </tbody> */}
       </Container>
-      <BackButton>
-        Back to Profile
-      </BackButton>
+      <BackButton
+            onClick={async () => {
+                window.location.href = '/#/userinfo';
+            }
+        }
+        >
+            Back to Profile
+        </BackButton>
     </Root>
   );
 };

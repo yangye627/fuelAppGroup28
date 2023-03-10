@@ -86,24 +86,30 @@ function RegisterPage() {
         </InputContainer>
         <RegisterButton 
             onClick={async () => {
-                console.log('Username:', username);
-                console.log('Password:', password);
-                const userAuth = { username, password };
-                const response = await fetch("/register", {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json"
-                  },
-                  body: JSON.stringify(userAuth)
-                });
-            
-                if (response.ok) {
-                  setUsername("");
-                  setPassword("");
-                  window.location.href = '/#/login';
+                if (username === '' || password === '')
+                {
+                    alert("username and password must be filled");
                 }
-                else {
-                    console.log("666");
+                else{
+                    console.log('Username:', username);
+                    console.log('Password:', password);
+                    const userAuth = { username, password };
+                    const response = await fetch("/register", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(userAuth)
+                    });
+                
+                    if (response.ok) {
+                    setUsername("");
+                    setPassword("");
+                    window.location.href = '/#/login';
+                    }
+                    else {
+                        console.log("666");
+                    }
                 }
               }
             }

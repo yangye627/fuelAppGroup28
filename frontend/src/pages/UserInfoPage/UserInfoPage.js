@@ -185,32 +185,65 @@ export const Register = () => {
         </Form>
         <UpdateProfile
             onClick={async () => {
-                const userinfo = { fullName, address1, address2, city, state, zipcode };
-                const response = await fetch("/profile", {
-                    method: "POST",
-                    headers: {
-                    "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(userinfo)
-                });
-                console.log(response);
-                if (response.ok) {
-                    console.log("profile works!!!!!!!!!!!!!!!!!");
-                    // setFullName("");
-                    // setAddress1("");
-                    // setAddress2("");
-                    // setCity("");
-                    // setState("");
-                    // setZipcode("");
-                    // window.location.href = '/#/profile';
+                if (fullName === '' || address1 === '' || city === '' || state === '' || zipcode === '')
+                {
+                    alert("Please provide user frofile.");
                 }
                 else {
-                    alert("incorrct profile return");
+                    const userinfo = { fullName, address1, address2, city, state, zipcode };
+                    const response = await fetch("/profile", {
+                        method: "POST",
+                        headers: {
+                        "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(userinfo)
+                    });
+                    console.log(response);
+                    if (response.ok) {
+                        console.log("profile works!!!!!!!!!!!!!!!!!");
+                        // setFullName("");
+                        // setAddress1("");
+                        // setAddress2("");
+                        // setCity("");
+                        // setState("");
+                        // setZipcode("");
+                    }
+                    else {
+                        alert("incorrct profile return");
+                    }
                 }
             }
         }
         >
             Update My Profile
+        </UpdateProfile>
+        <UpdateProfile
+            onClick={async () => {
+                if (fullName === '' || address1 === '' || city === '' || state === '' || zipcode === '')
+                {
+                    alert("Please provide user frofile.");
+                }
+                else {
+                    window.location.href = '/#/fuelQuote';
+                }
+            }
+        }
+        >
+            Fuel Quote
+        </UpdateProfile>
+        <UpdateProfile
+            onClick={async () => {
+                if (fullName === '' || address1 === '' || city === '' || state === '' || zipcode === '')
+                {
+                    alert("Please provide user frofile.");
+                }
+                else {
+                    window.location.href = '/#/history';
+                }
+            }
+        }
+        >
+            History
         </UpdateProfile>
     </Root>
   );
