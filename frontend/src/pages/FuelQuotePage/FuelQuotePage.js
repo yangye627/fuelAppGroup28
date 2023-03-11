@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // import { useHistory } from 'react-router';
 import { Form, Row, Col, Container, Alert, Table } from 'react-bootstrap';
 // import auth from '../../auth/auth';
@@ -39,8 +39,8 @@ const QuoteFuel = styled.button`
 export const Register = () => {
 
   // User information hook
-  const [fullName, setFullName] = useState('');
-  const [address] = useState('');
+  const [gallons, setGallons] = useState('');
+  const [fullAddress, setFullAddress] = useState('');
   const [date, setDate] = useState('');
   
   const [price, setPrice] = useState('');
@@ -48,15 +48,24 @@ export const Register = () => {
 
   const [error, setError] = useState('');
 
-// if we get our database, those placehold should be the value from db
-// const [user, setUser] = useState([{}])
-//     useEffect(() => {
-//         axios.get('http://localhost:8000/auth/users/me') // update api 
-//             .then(res => {
-//                 setUser(res.data)
-//             })
-//     });
-//     console.log(user)
+  useEffect(() => {
+    const fetchAddressPriceInfo = async () => {
+        const response = await fetch("/fullAddressAndPrice")
+        const fetchedUser = await response.json()
+        if (typeof fetchedUser.user.fullAddress !== "undefined"){
+            setFullAddress(fetchedUser.user.fullAddress);
+            setPrice(fetchedUser.user.price);
+            setAmount(fetchedUser.user.amount);
+            return;
+        }
+    }
+
+    const interval = setInterval(function(){
+        fetchAddressPriceInfo();
+        clearInterval(interval);
+        return
+    }, 2000)
+}, [])
 
   return (
     <Root>
@@ -67,16 +76,9 @@ export const Register = () => {
                 <Form.Control 
                     required pattern="[0-9]+"
                     type="number"
-                    value={fullName || ""}
-                    onChange={(f) => setFullName(f.currentTarget.value)}
+                    value={gallons || ""}
+                    onChange={(f) => setGallons(f.currentTarget.value)}
                     />
-            </Form.Group>
-            <Form.Group>
-                <Form.Label>Delivery Address</Form.Label>
-                <Form.Text 
-                    type="text"
-                    value={address || ""}
-                    />  <br />888need user info from db <br /><br />
             </Form.Group>
             <Form.Group>
                 <Form.Label>Delivery Date</Form.Label>
@@ -87,14 +89,44 @@ export const Register = () => {
                     />
             </Form.Group>
             <Form.Group>
+                <Form.Label>Delivery Address</Form.Label>
+                <br/> {fullAddress} <br /><br />
+            </Form.Group>
+
+            <Form.Group>
                 <Form.Label>Suggested Price/gallon</Form.Label>
                 <Form.Text 
                     type="float"
                     value={price || ""}
                     onChange={(f) => setPrice(f.currentTarget.value)}
-                    /><br />888need user info from db <br /><br />
+                    /><br /> {price + " $/gallon"} <br /><br />
             </Form.Group>
-            <QuoteFuel >
+            <QuoteFuel 
+                onClick={async () => {
+                    // if (username === '' || password === '')
+                    // {
+                    //     alert("username and password must be filled");
+                    // }
+                    // else{
+                        const calAmount = { gallons, date };
+                        const response = await fetch("/fuelQuote", {
+                            method: "POST",
+                            headers: {
+                            "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify(calAmount)
+                        });
+                        console.log(response);
+                        if (response.ok) {
+                            console.log("works!!!!!!!!!!!!!!!!!");
+                        }
+                        else {
+                            alert("incorrct calculation");
+                        }
+                    //}
+                  }
+                }
+            >
                 Get the total amount
             </QuoteFuel>
             <br /><br />
@@ -103,7 +135,7 @@ export const Register = () => {
                 <Form.Text 
                     type="float"
                     value={amount || ""}
-                    /><br />888need user info from db <br /><br />
+                    /><br /> {amount} <br /><br />
             </Form.Group>
         </Form>
         <QuoteFuel

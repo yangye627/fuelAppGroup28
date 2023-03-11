@@ -8,21 +8,31 @@ app = Flask(__name__)
 # user = {
 #   "userNameExample_1" : {
 #       password : "passwordExample_1",
-#       fullName : "fullNameExample_1",
-#       address1 : "address1Example_1",
-#       address2 : "address2Example_1",
-#       city     : "cityExample_1",
-#       state    : "stateExample_1",
-#       zipcode  : "zipcodeExample_1"
+#       fullName   : "fullNameExample_1",
+#       address1   : "address1Example_1",
+#       address2   : "address2Example_1",
+#       city       : "cityExample_1",
+#       state      : "stateExample_1",
+#       zipcode    : "zipcodeExample_1",
+#       price      : 2.99,
+#       fullAddress: fullName + address1 + address2 + city + state + zipcode,
+#       gallons    : "gallons_1",
+#       date       : "date_1",
+#       amount     : "amount_1"
 #   },
 #   "userNameExample_2" : {
-#       password : "passwordExample_2",
-#       fullName : "fullNameExample_2",
-#       address1 : "address1Example_2",
-#       address2 : "address2Example_2",
-#       city     : "cityExample_2",
-#       state    : "stateExample_2",
-#       zipcode  : "zipcodeExample_2"
+#       password   : "passwordExample_2",
+#       fullName   : "fullNameExample_2",
+#       address1   : "address1Example_2",
+#       address2   : "address2Example_2",
+#       city       : "cityExample_2",
+#       state      : "stateExample_2",
+#       zipcode    : "zipcodeExample_2",
+#       price      : 2.99,
+#       fullAddress: fullName + address1 + address2 + city + state + zipcode,
+#       gallons    : "gallons_2",
+#       date       : "date_2",
+#       amount     : "amount_2"
 #   },
 #   .
 #   .
@@ -79,15 +89,36 @@ def updateProfile():
     state    = profile_data["state"]    
     zipcode  = profile_data["zipcode"]  
     # when we have the db, store the user info to the database
-    user[userName]["fullName"] = fullName
-    user[userName]["address1"] = address1
-    user[userName]["address2"] = address2
-    user[userName]["city"]     = city    
-    user[userName]["state"]    = state   
-    user[userName]["zipcode"]  = zipcode 
- 
+    user[userName]["fullName"]    = fullName
+    user[userName]["address1"]    = address1
+    user[userName]["address2"]    = address2
+    user[userName]["city"]        = city    
+    user[userName]["state"]       = state   
+    user[userName]["zipcode"]     = zipcode
+    user[userName]["price"]       = 2.99
+    add2 = address2
+    if len(add2) != 0: add2 = address2 + ", "
+    user[userName]["fullAddress"] = address1 + ", " + add2 + city + ", " + state + ", " + zipcode
     print(user)
     return profile_data
+
+@app.route("/fullAddressAndPrice")
+def fullNamePrice():
+    if len(user[userName]["fullAddress"]):
+        return {"user": user[userName]}
+    else:
+        return {"user": "null"}
+
+@app.route("/fuelQuote", methods=['POST'])
+def fuelQute():
+    quote = request.get_json()
+    print(quote)
+    gallons = int(quote["gallons"])
+    date = quote["date"]
+    user[userName]["gallons"] = gallons   
+    user[userName]["date"]    = date
+    user[userName]["amount"]  = round(gallons * 2.99, 2)
+    return quote
 
 if __name__ == "__main__":
     app.run(debug=True)
