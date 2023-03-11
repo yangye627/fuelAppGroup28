@@ -36,6 +36,28 @@ const UpdateProfile = styled.button`
     width: 180px;
 `;
 
+const checkInput = (fullName, address1, address2, city, state, zipcode) => {
+    if (fullName === '' || address1 === '' || city === '' || state === '' || zipcode === '')
+    {
+        return "Please provide user frofile.";
+    }
+    else if (fullName.length > 50) {
+        return "The length of Full Name is extend 50 characters.";
+    }
+    else if (address1.length > 50) {
+        return "The length of Address 1 is extend 100 characters.";
+    }
+    else if (address2.length > 50) {
+        return "The length of Address 2 is extend 100 characters.";
+    }
+    else if (city.length > 50) {
+        return "The length of City is extend 100 characters.";
+    }
+    else if (zipcode.length > 9 || zipcode.length < 5) {
+        return "The length of Zipcode is extend 9 characters or less than 5 characters.";
+    }
+    return "True";
+}
 export const Register = () => {
 
   // User information hook
@@ -185,9 +207,10 @@ export const Register = () => {
         </Form>
         <UpdateProfile
             onClick={async () => {
-                if (fullName === '' || address1 === '' || city === '' || state === '' || zipcode === '')
+                const checkInputMsg = checkInput(fullName, address1, address2, city, state, zipcode);
+                if (checkInputMsg !== "True")
                 {
-                    alert("Please provide user frofile.");
+                    alert(checkInputMsg);
                 }
                 else {
                     const userinfo = { fullName, address1, address2, city, state, zipcode };
@@ -219,13 +242,14 @@ export const Register = () => {
         </UpdateProfile>
         <UpdateProfile
             onClick={async () => {
-                if (fullName === '' || address1 === '' || city === '' || state === '' || zipcode === '')
+                const checkInputMsg = checkInput(fullName, address1, address2, city, state, zipcode);
+                if (checkInputMsg !== "True")
                 {
-                    alert("Please provide user frofile.");
+                    alert(checkInputMsg);
                 }
                 else {
                     window.location.href = '/#/fuelQuote';
-                }
+                }           
             }
         }
         >
@@ -233,13 +257,14 @@ export const Register = () => {
         </UpdateProfile>
         <UpdateProfile
             onClick={async () => {
-                if (fullName === '' || address1 === '' || city === '' || state === '' || zipcode === '')
+                const checkInputMsg = checkInput(fullName, address1, address2, city, state, zipcode);
+                if (checkInputMsg !== "True")
                 {
-                    alert("Please provide user frofile.");
+                    alert(checkInputMsg);
                 }
                 else {
                     window.location.href = '/#/history';
-                }
+                }    
             }
         }
         >
