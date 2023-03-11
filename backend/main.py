@@ -7,32 +7,70 @@ app = Flask(__name__)
 # user schema:
 # user = {
 #   "userNameExample_1" : {
-#       password : "passwordExample_1",
-#       fullName   : "fullNameExample_1",
-#       address1   : "address1Example_1",
-#       address2   : "address2Example_1",
-#       city       : "cityExample_1",
-#       state      : "stateExample_1",
-#       zipcode    : "zipcodeExample_1",
-#       price      : 2.99,
-#       fullAddress: fullName + address1 + address2 + city + state + zipcode,
-#       gallons    : "gallons_1",
-#       date       : "date_1",
-#       amount     : "amount_1"
+#       password    : "passwordExample_1",
+#       fullName    : "fullNameExample_1",
+#       address1    : "address1Example_1",
+#       address2    : "address2Example_1",
+#       city        : "cityExample_1",
+#       state       : "stateExample_1",
+#       zipcode     : "zipcodeExample_1",
+#       price       : 2.99,
+#       fullAddress : fullName + address1 + address2 + city + state + zipcode,
+#       gallons     : "gallons_1",
+#       date        : "date_1",
+#       amount      : "amount_1"
+#       history     ：[
+#           {
+#               price      : 2.99,
+#               fullAddress: fullName + address1 + address2 + city + state + zipcode,
+#               gallons    : "gallons_1_1",
+#               date       : "date_1_1",
+#               amount     : "amount_1_1"
+#           },
+#           {
+#               price      : 2.99,
+#               fullAddress: fullName + address1 + address2 + city + state + zipcode,
+#               gallons    : "gallons_1_2",
+#               date       : "date_1_2",
+#               amount     : "amount_1_2"
+#           },
+#           .
+#           .
+#           .
+#       ]
 #   },
 #   "userNameExample_2" : {
-#       password   : "passwordExample_2",
-#       fullName   : "fullNameExample_2",
-#       address1   : "address1Example_2",
-#       address2   : "address2Example_2",
-#       city       : "cityExample_2",
-#       state      : "stateExample_2",
-#       zipcode    : "zipcodeExample_2",
-#       price      : 2.99,
-#       fullAddress: fullName + address1 + address2 + city + state + zipcode,
-#       gallons    : "gallons_2",
-#       date       : "date_2",
-#       amount     : "amount_2"
+#       password    : "passwordExample_2",
+#       fullName    : "fullNameExample_2",
+#       address1    : "address1Example_2",
+#       address2    : "address2Example_2",
+#       city        : "cityExample_2",
+#       state       : "stateExample_2",
+#       zipcode     : "zipcodeExample_2",
+#       price       : 2.99,
+#       fullAddress : fullName + address1 + address2 + city + state + zipcode,
+#       gallons     : "gallons_2",
+#       date        : "date_2",
+#       amount      : "amount_2"
+#       history     ：[
+#           {
+#               price      : 2.99,
+#               fullAddress: fullName + address1 + address2 + city + state + zipcode,
+#               gallons    : "gallons_2_1",
+#               date       : "date_2_1",
+#               amount     : "amount2_1"
+#           },
+#           {
+#               price      : 2.99,
+#               fullAddress: fullName + address1 + address2 + city + state + zipcode,
+#               gallons    : "gallons_2_2",
+#               date       : "date_2_2",
+#               amount     : "amount_2_2"
+#           },
+#           .
+#           .
+#           .
+#       ]
 #   },
 #   .
 #   .
@@ -52,7 +90,9 @@ def createUser():
     # when we have the db, store the user info to the database    
     username = user_data["username"]
     password = user_data["password"]
+    
     user[username] = {}
+    user[username]["history"] = []
     user[username]["password"] = password
     print(f"register {user}")
     return user_data
@@ -117,8 +157,30 @@ def fuelQute():
     date = quote["date"]
     user[userName]["gallons"] = gallons   
     user[userName]["date"]    = date
-    user[userName]["amount"]  = round(gallons * 2.99, 2)
+    user[userName]["amount"]  = '{0:.2f}'.format(gallons * 2.99, 2)
+    user[userName]["history"].append({
+        "price"       : user[userName]["price"],
+        "fullAddress" : user[userName]["fullAddress"],
+        "gallons"     : user[userName]["gallons"],
+        "date"        : user[userName]["date"],
+        "amount"      : user[userName]["amount"]
+    })
+    print(user[userName])
     return quote
 
+@app.route("/getPrice")
+def priceAndTotal():
+    if len(user[userName]["fullAddress"]):
+        return {"user": user[userName]}
+    else:
+        return {"user": "null"}
+
+@app.route("/logout")
+def logout():
+    global userName
+    userName = ""
+    print(user)
+    return "True"
+    
 if __name__ == "__main__":
     app.run(debug=True)

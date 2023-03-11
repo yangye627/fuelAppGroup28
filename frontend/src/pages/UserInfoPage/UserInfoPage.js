@@ -67,6 +67,7 @@ export const Register = () => {
   const [city, setCity]         = useState('');
   const [state, setState]       = useState('');
   const [zipcode, setZipcode]   = useState('');
+  const [logOut, setLogout]   = useState(false);
 
     useEffect(() => {
         const fetchUserInfo = async () => {
@@ -89,6 +90,25 @@ export const Register = () => {
             return
         }, 2000)
     }, [])
+
+    
+    // useEffect(() => {
+    //     if (logOut === true) {
+    //         const logout = async () => {
+    //         const response = await fetch("/logout")
+    //         if (response === true) {
+    //             window.location.href = '/#/';
+    //             return;
+    //         }
+    //     }
+
+    //     const interval = setInterval(function(){
+    //         logout();
+    //         clearInterval(interval);
+    //         return
+    //     }, 2000)
+    // }
+    // }, [])
 
   return (
     <Root>
@@ -248,7 +268,7 @@ export const Register = () => {
                     alert(checkInputMsg);
                 }
                 else {
-                    window.location.href = '/#/fuelQuote';
+                    window.location.href = '/?#/fuelQuote';
                 }           
             }
         }
@@ -269,6 +289,18 @@ export const Register = () => {
         }
         >
             History
+        </UpdateProfile>
+        <UpdateProfile
+            onClick={async () => {
+                const response = await fetch("/logout")
+                if (response.ok) {
+                    window.location.href = '/#/';
+                    return;
+                }
+            }
+        }
+        >
+            Logout
         </UpdateProfile>
     </Root>
   );

@@ -36,15 +36,15 @@ const QuoteFuel = styled.button`
     width: 180px;
 `;
 
-export const Register = () => {
+export const FuelQuote = () => {
 
   // User information hook
   const [gallons, setGallons] = useState('');
   const [fullAddress, setFullAddress] = useState('');
   const [date, setDate] = useState('');
   
-  const [price, setPrice] = useState('');
-  const [amount, setAmount] = useState('');
+//   const [price, setPrice] = useState('');
+//   const [amount, setAmount] = useState('');
 
   const [error, setError] = useState('');
 
@@ -54,8 +54,8 @@ export const Register = () => {
         const fetchedUser = await response.json()
         if (typeof fetchedUser.user.fullAddress !== "undefined"){
             setFullAddress(fetchedUser.user.fullAddress);
-            setPrice(fetchedUser.user.price);
-            setAmount(fetchedUser.user.amount);
+            // setPrice(fetchedUser.user.price);
+            // setAmount(fetchedUser.user.amount);
             return;
         }
     }
@@ -90,24 +90,16 @@ export const Register = () => {
             </Form.Group>
             <Form.Group>
                 <Form.Label>Delivery Address</Form.Label>
-                <br/> {fullAddress} <br /><br />
+                <br/> {fullAddress} <br />
             </Form.Group>
 
-            <Form.Group>
-                <Form.Label>Suggested Price/gallon</Form.Label>
-                <Form.Text 
-                    type="float"
-                    value={price || ""}
-                    onChange={(f) => setPrice(f.currentTarget.value)}
-                    /><br /> {price + " $/gallon"} <br /><br />
-            </Form.Group>
             <QuoteFuel 
                 onClick={async () => {
-                    // if (username === '' || password === '')
-                    // {
-                    //     alert("username and password must be filled");
-                    // }
-                    // else{
+                    if (gallons === '' || date === '')
+                    {
+                        alert("Please enter Gallons and Date.");
+                    }
+                    else{
                         const calAmount = { gallons, date };
                         const response = await fetch("/fuelQuote", {
                             method: "POST",
@@ -118,36 +110,31 @@ export const Register = () => {
                         });
                         console.log(response);
                         if (response.ok) {
-                            console.log("works!!!!!!!!!!!!!!!!!");
+                            setGallons("");
+                            setDate("");
+                            window.location.href = '/#/getPrice';
+                            return false;
                         }
                         else {
                             alert("incorrct calculation");
                         }
-                    //}
+                    }
                   }
                 }
             >
                 Get the total amount
             </QuoteFuel>
-            <br /><br />
-            <Form.Group>
-                <Form.Label>Total Amount Due:</Form.Label>
-                <Form.Text 
-                    type="float"
-                    value={amount || ""}
-                    /><br /> {amount} <br /><br />
-            </Form.Group>
         </Form>
-        <QuoteFuel
-            onClick={async () => {
-                window.location.href = '/#/userinfo';
+            <QuoteFuel
+                onClick={async () => {
+                    window.location.href = '/#/userinfo';
+                }
             }
-        }
-        >
-            Back to Profile
-        </QuoteFuel>
+            >
+                Back to Profile
+            </QuoteFuel>
     </Root>
   );
 };
 
-export default Register;
+export default FuelQuote;

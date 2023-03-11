@@ -7,6 +7,7 @@ import LoginPage from './pages/LoginPage';
 import UserInfoPage from './pages/UserInfoPage'
 import FuelQuotePage from './pages/FuelQuotePage'
 import FuelHistory from './pages/HistoryPage';
+import Price from './pages/PricePage';
 import Footer from './components/Footer';
 import styled from 'styled-components';
 
@@ -31,6 +32,7 @@ function App() {
             <Route exact path="/register" element={<RegisterPage/>} />
             <Route exact path="/fuelQuote" element={<FuelQuotePage/>} />
             <Route exact path="/history" element={<FuelHistory/>} />
+            <Route exact path="/getPrice" element={<Price/>} />
           </Routes>
         <Footer />
       </Router>
