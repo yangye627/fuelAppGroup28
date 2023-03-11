@@ -19,3 +19,5 @@ Backend:
                 `venv\Scripts\activate`
 
 3.     python .\main.py
+
+![Screenshot_1](https://user-images.githubusercontent.com/92761607/224471921-ff1901fd-de68-4991-9b81-8cee7f8bbf29.jpg)
