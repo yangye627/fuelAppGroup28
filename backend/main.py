@@ -155,8 +155,13 @@ def fuelQute():
     print(quote)
     gallons = int(quote["gallons"])
     date = quote["date"]
-    user[userName]["gallons"] = gallons   
-    user[userName]["date"]    = date
+      
+    # convert date format from yyyy-mm-dd to nn/dd/yyyy
+    f_date = date.split("-")
+    new_date = f_date[1] + "/" + f_date[2] + "/" + f_date[0]
+    
+    user[userName]["gallons"] = gallons
+    user[userName]["date"]    = new_date
     user[userName]["amount"]  = '{0:.2f}'.format(gallons * 2.99, 2)
     user[userName]["history"].append({
         "price"       : user[userName]["price"],

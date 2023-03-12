@@ -63,52 +63,51 @@ const BackButton = styled.button`
 
 
 const HistoryPage = () => {
-  // const [fuelHistory, setFuelHistory] = useState([]);
+  const [fuelHistory, setFuelHistory] = useState([]);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const result = await axios.get('http://localhost:3000');
-  //     setFuelHistory(result.data);
-  //   };
-  //   fetchData();
-  // }, []);
+  useEffect(() => {
+    const priceModel = async () => {
+        const response = await fetch("/getPrice")
+        const fetchedUser = await response.json()
+        if (typeof fetchedUser.user.fullAddress !== "undefined"){
+            setFuelHistory(fetchedUser.user.history);
+            return;
+        }
+    }
+
+    const interval = setInterval(function(){
+        priceModel();
+        clearInterval(interval);
+        return
+    }, 1000)
+}, [])
  
   return (
     <Root>
       <Title>Fuel History</Title>
-      <Container>
-        <Row>
-          <Col>Delivery Date</Col>
-          <Col>Delivery Address</Col>
-          <Col>Gallons Requested</Col>
-          <Col>Suggested Price</Col>
-          <Col>Total Amount</Col>
-        </Row>
-        <Row>
-          <Col>08/21/2023(hardcode for now need to get info from db once db is completed)</Col>
-          <Col>110 BeerXGnarDogs St, Houston, TX, 77036</Col>
-          <Col>100</Col>
-          <Col>2.58</Col>
-          <Col>100</Col>
-        </Row>
-        <Row>
-          <Col>09/30/2023</Col>
-          <Col>2201 Doubecats St, Houston, TX, 77024</Col>
-          <Col>150</Col>
-          <Col>2.67</Col>
-          <Col>150</Col>
-        </Row>
-        {/* <tbody>
-          {fuelHistory.map(entry => (
-            <tr key={entry.id}>
-              <td>{entry.date}</td>
-              <td>{entry.fuelType}</td>
-              <td>{entry.amount}</td>
-              <td>{entry.price}</td>
+      <Table bordered hover>
+        <thead>
+          <tr>
+            <th>Delivery Date</th>
+            <th>Delivery Address</th>
+            <th>Gallons Requested</th>
+            <th>Suggested Price</th>
+            <th>Total Amount</th>
+          </tr>
+        </thead>
+        {fuelHistory && fuelHistory.map((items, index) => (
+          <tbody key = {index}>
+            <tr>
+              <th>{items.date}</th>
+              <th>{items.fullAddress}</th>
+              <th>{items.gallons}</th>
+              <th>{"$ " + items.price}</th>
+              <th>{"$ " + items.amount}</th>
             </tr>
-          ))}
-        </tbody> */}
-      </Container>
+          </tbody>
+
+        ))}
+      </Table>
       <BackButton
             onClick={async () => {
                 window.location.href = '/#/userinfo';

@@ -91,25 +91,6 @@ export const Register = () => {
         }, 2000)
     }, [])
 
-    
-    // useEffect(() => {
-    //     if (logOut === true) {
-    //         const logout = async () => {
-    //         const response = await fetch("/logout")
-    //         if (response === true) {
-    //             window.location.href = '/#/';
-    //             return;
-    //         }
-    //     }
-
-    //     const interval = setInterval(function(){
-    //         logout();
-    //         clearInterval(interval);
-    //         return
-    //     }, 2000)
-    // }
-    // }, [])
-
   return (
     <Root>
       <Title>Profile</Title>
