@@ -73,11 +73,11 @@ export const Price = () => {
                     /><br /> {price + " $/gallon"} <br /><br />
             </Form.Group>
             <Form.Group>
-                <Form.Label>Total Amount Due:</Form.Label>
+                <Form.Label>Total Amount Due</Form.Label>
                 <Form.Text 
                     type="float"
                     value={amount || ""}
-                    /><br /> {amount + " $"} <br /><br />
+                    /><br /> {"$ " + amount} <br /><br />
             </Form.Group>
         </Form>
         <QuoteFuel
